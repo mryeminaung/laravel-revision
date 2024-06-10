@@ -34,7 +34,7 @@
         @foreach ($articles as $article)
             @if ($filterTag)
                 @if ($article->category->name === $filterTag)
-                    <div class="card mb-2">
+                    <div class="card mb-2 bg-white">
                         <div class="card-body">
                             <h5 class="card-title">{{ $article->title }}
                                 <span class="badge bg-primary">{{ $article->category->name }}</span>
@@ -50,7 +50,7 @@
                     </div>
                 @endif
             @else
-                <div class="card mb-2">
+                <div class="card mb-2 bg-white">
                     <div class="card-body">
                         <h5 class="card-title">{{ $article->title }}
                             <span class="badge bg-primary">{{ $article->category->name }}</span>

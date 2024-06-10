@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,7 +19,10 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         Article::truncate();
         Category::truncate();
+        Comment::truncate();
+
         Article::factory(40)->create();
+        Comment::factory(100)->create();
 
         $tags = [
             'Politics', 'Business', 'World', 'Science', 'Health', 'Education',

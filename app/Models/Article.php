@@ -13,7 +13,13 @@ class Article extends Model
 
     public $fillable = ['title', 'body', 'category_id'];
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'article_id');
     }
 }

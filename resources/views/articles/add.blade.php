@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container bg-white p-4">
         <form method="post" action="{{ url('articles/store') }}">
             @csrf
             <div class="mb-3">

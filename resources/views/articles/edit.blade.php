@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container bg-white p-4">
         <form method="POST" action="{{ url("articles/{$article->id}/update") }}">
             @csrf
             @method('put')
@@ -26,6 +26,8 @@
                     @endforeach
                 </select>
             </div>
+            
+            <a href="{{ url("/articles/detail/$article->id") }}" class="btn btn-primary " role="button">Cancel</a>
             <input type="submit" value="Update" class="btn btn-primary">
         </form>
     </div>
