@@ -16,13 +16,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-        Article::truncate();
         Category::truncate();
+        Article::truncate();
         Comment::truncate();
+        User::truncate();
 
         Article::factory(40)->create();
         Comment::factory(100)->create();
+        User::factory(10)->create();
 
         $tags = [
             'Politics', 'Business', 'World', 'Science', 'Health', 'Education',

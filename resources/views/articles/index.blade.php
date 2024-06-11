@@ -37,7 +37,7 @@
                     <div class="card mb-2 bg-white">
                         <div class="card-body">
                             <h5 class="card-title">{{ $article->title }}
-                                <span class="badge bg-primary">{{ $article->category->name }}</span>
+                                {{-- <span class="badge bg-primary">{{ $article->category->name }}</span> --}}
                             </h5>
                             <div class="card-subtitle mb-2 text-muted small">
                                 {{ $article->created_at->diffForHumans() }}
@@ -53,7 +53,7 @@
                 <div class="card mb-2 bg-white">
                     <div class="card-body">
                         <h5 class="card-title">{{ $article->title }}
-                            <span class="badge bg-primary">{{ $article->category->name }}</span>
+                            {{-- <span class="badge bg-primary">{{ $article->category->name }}</span> --}}
                         </h5>
                         <div class="card-subtitle mb-2 text-muted small">
                             {{ $article->created_at->diffForHumans() }}
