@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -39,9 +44,10 @@ class ArticleController extends Controller
         Article::create([
             'title' => $request->title,
             'body' => $request->body,
+            'user_id' => auth()->user()->id,
             'category_id' => $request->category_id
         ]);
-        return redirect(session('pre_url'))->with('add', 'Article Added');
+        return redirect('/home')->with('add', 'Article Added');
     }
 
     /**

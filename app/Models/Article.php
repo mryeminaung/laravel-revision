@@ -11,7 +11,7 @@ class Article extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['title', 'body', 'category_id'];
+    public $fillable = ['title', 'body', 'user_id', 'category_id'];
 
     public function user()
     {
