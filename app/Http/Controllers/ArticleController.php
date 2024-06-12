@@ -43,6 +43,7 @@ class ArticleController extends Controller
     {
         Article::create([
             'title' => $request->title,
+            'slug' => str_replace(' ', '-', strtolower($request->title)),
             'body' => $request->body,
             'user_id' => auth()->user()->id,
             'category_id' => $request->category_id
@@ -75,10 +76,11 @@ class ArticleController extends Controller
     {
         $article->update([
             'title' => $request->title,
+            'slug' => str_replace(' ', '-', strtolower($request->title)),
             'body' => $request->body,
             'category_id' => $request->category_id
         ]);
-        return redirect("/articles/detail/{$article->id}")->with('update', 'Article Updated');
+        return redirect("/articles/detail/{$article->slug}")->with('update', 'Article Updated');
     }
 
     /**

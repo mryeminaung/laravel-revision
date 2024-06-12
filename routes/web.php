@@ -11,7 +11,7 @@ Route::get('/', function () {
 
 // article CRUD
 Route::get('/articles', [ArticleController::class, 'index']);
-Route::get('/articles/detail/{article}', [ArticleController::class, 'show'])->name('article.detail')->whereNumber('id');
+Route::get('/articles/detail/{article:slug}', [ArticleController::class, 'show'])->name('article.detail')->whereNumber('id');
 Route::get('/articles/delete/{article}', [ArticleController::class, 'destroy']);
 Route::get('/articles/add', [ArticleController::class, 'create']);
 Route::post('/articles/store', [ArticleController::class, 'store']);

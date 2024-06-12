@@ -27,7 +27,7 @@
                 </select>
             </div>
             
-            <a href="{{ url("/articles/detail/$article->id") }}" class="btn btn-primary " role="button">Cancel</a>
+            <a href="{{ url("/articles/detail/$article->slug") }}" class="btn btn-primary " role="button">Cancel</a>
             <input type="submit" value="Update" class="btn btn-primary">
         </form>
     </div>

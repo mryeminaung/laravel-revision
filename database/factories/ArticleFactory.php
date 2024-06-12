@@ -18,6 +18,7 @@ class ArticleFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence,
+            'slug' => str_replace(' ', '-', strtolower($this->faker->sentence(4))),
             'body' => $this->faker->paragraph,
             'user_id' => rand(1, 10),
             'category_id' => rand(1, 10)
