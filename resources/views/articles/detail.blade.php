@@ -11,9 +11,16 @@
 
         <div class="row">
             <div class="col-12 col-md-6 mb-3">
-                <a class="btn btn-primary mb-2" href="{{ session('pre_url') }}" role="button">
-                    Back
-                </a>
+                @if (session('dashboard_url'))
+                    <a class="btn btn-primary mb-2" href="{{ session('dashboard_url') }}" role="button">
+                        Back
+                    </a>
+                @else
+                    <a class="btn btn-primary mb-2" href="{{ session('pre_url') }}" role="button">
+                        Back
+                    </a>
+                @endif
+
                 <div class="card mb-2 bg-white mt-1">
                     <div class="card-body">
                         <h5 class="card-title">{{ $article->title }}
@@ -44,6 +51,10 @@
                     <input type="hidden" name="article_id" value="{{ $article->id }}">
                     {{-- <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> --}}
                     <textarea name="content" class="form-control mb-2 bg-white" placeholder="New Comment"></textarea>
+                    @error('content')
+                        <span class="text-danger">{{ $message }}</span>
+                        <br />
+                    @enderror
                     <input type="submit" value="Add Comment" class="btn btn-secondary btn-sm">
                 </form>
                 {{-- @endauth --}}

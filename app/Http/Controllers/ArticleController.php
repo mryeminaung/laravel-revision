@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleCreateRequest;
+use App\Http\Requests\ArticleUpdateRequest;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -23,6 +25,7 @@ class ArticleController extends Controller
         $articles = Article::all();
         $data = Category::all();
         Session::put('pre_url', request()->fullUrl());
+        Session::put('dashboard_url', null);
 
         return view('articles.index', ['articles' => $articles, 'categories' => $data, 'filterTag' => request()->query('category')]);
     }
@@ -39,15 +42,15 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ArticleCreateRequest $request)
     {
-        Article::create([
-            'title' => $request->title,
-            'slug' => str_replace(' ', '-', strtolower($request->title)),
-            'body' => $request->body,
-            'user_id' => auth()->user()->id,
-            'category_id' => $request->category_id
-        ]);
+        $validatedData = $request->validated();
+
+        $validatedData['slug'] = str_replace(' ', '-', strtolower($request->title));
+        $validatedData['user_id'] = auth()->user()->id;
+
+        Article::create($validatedData);
+
         return redirect('/home')->with('add', 'Article Added');
     }
 
@@ -72,14 +75,13 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(ArticleUpdateRequest $request, Article $article)
     {
-        $article->update([
-            'title' => $request->title,
-            'slug' => str_replace(' ', '-', strtolower($request->title)),
-            'body' => $request->body,
-            'category_id' => $request->category_id
-        ]);
+        $validatedData = $request->validated();
+        $validatedData['slug'] = str_replace(' ', '-', strtolower($request->title));
+
+        $article->update($validatedData);
+
         return redirect("/articles/detail/{$article->slug}")->with('update', 'Article Updated');
     }
 
@@ -89,6 +91,6 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
-        return redirect(session('pre_url'))->with('delete', 'Article Deleted');
+        return redirect(session('pre_url') ?? session('dashboard_url'))->with('delete', 'Article Deleted');
     }
 }

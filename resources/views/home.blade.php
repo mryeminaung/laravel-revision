@@ -17,7 +17,7 @@
 
                         {{-- {{ __('You are logged in!') }} --}}
                     </div>
-                    <div class="px-3">
+                    <div class="px-3 mb-4">
                         @foreach ($articles as $article)
                             <div class="card mb-2 bg-white">
                                 <div class="card-body">
@@ -25,10 +25,11 @@
                                         <span class="badge bg-primary">{{ $article->category->name }}</span>
                                     </h5>
                                     <div class="card-subtitle mb-2 text-muted small">
+                                        By <strong>{{ $article->user->name }}</strong>,
                                         {{ $article->created_at->diffForHumans() }}
                                     </div>
                                     <p class="card-text">{{ $article->body }}</p>
-                                    <a class="card-link" href="{{ url("/articles/detail/$article->id") }}">
+                                    <a class="card-link" href="{{ url("/articles/detail/$article->slug") }}">
                                         View Detail &raquo;
                                     </a>
                                 </div>
