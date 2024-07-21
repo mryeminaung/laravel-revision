@@ -10,18 +10,26 @@ Route::get('/', function () {
 });
 
 // article CRUD
-Route::get('/articles', [ArticleController::class, 'index']);
-Route::get('/articles/detail/{article:slug}', [ArticleController::class, 'show'])->name('article.detail')->whereNumber('id');
+Route::controller(ArticleController::class)->group(function () {
+    Route::prefix('articles')->group(function () {
+        Route::get('/', 'index');
+        Route::get('detail/{article:slug}', 'show')->name('article.detail')->whereNumber('id');
 
-Route::get('/articles/delete/{article}', [ArticleController::class, 'destroy']);
-Route::get('/articles/add', [ArticleController::class, 'create']);
-Route::post('/articles/store', [ArticleController::class, 'store']);
-Route::get('/articles/{article}/edit', [ArticleController::class, 'edit']);
-Route::match(['put', 'patch'], '/articles/{article}/update', [ArticleController::class, 'update']);
+        Route::get('delete/{article}', 'destroy')->name('article.delete');
+        Route::get('add', 'create')->name('article.create');
+        Route::post('store', 'store')->name('article.store');
+        Route::get('{article}/edit', 'edit')->name('article.edit');
+        Route::match(['put', 'patch'], '{article}/update', 'update')->name('article.update');
+    });
+});
 
 // comment add, delete
-Route::post('/comments/add', [CommentController::class, 'add']);
-Route::get('/comments/{comment}/delete', [CommentController::class, 'delete']);
+Route::controller(CommentController::class)->group(function () {
+    Route::prefix('comments')->group(function () {
+        Route::post('add', 'add');
+        Route::get('{comment}/delete', 'delete');
+    });
+});
 
 Auth::routes();
 

@@ -1,13 +1,7 @@
-@extends('layouts.app')
+<x-layout>
 
-@section('content')
     <div class="container">
-        @if (session('update'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{ session('update') }}</strong>
-            </div>
-        @endif
+        <x-alert name="update" />
 
         <div class="row">
             <div class="col-12 col-md-6 mb-3 ">
@@ -34,56 +28,15 @@
                         </div>
                         <p class="card-text">{{ $article->body }}</p>
 
-                        @auth
-                            @if (Auth::user()->id === $article->user_id)
-                                <a class="btn btn-warning btn-sm" href="{{ url("/articles/$article->id/edit") }}">
-                                    Edit
-                                </a>
-                                <a class="btn btn-danger btn-sm" href="{{ url("/articles/delete/$article->id") }}">
-                                    Delete
-                                </a>
-                            @endif
-                        @endauth
+                        <x-action-btns :article="$article" />
+
                     </div>
                 </div>
-                {{-- @auth --}}
-                <form action="{{ url('/comments/add') }}"  method="post">
-                    @csrf
-                    @method('post')
-                    <input type="hidden" name="article_id" value="{{ $article->id }}">
-                    {{-- <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> --}}
-                    <textarea name="content" class="form-control mb-2 border shadow-sm bg-white" placeholder="New Comment"></textarea>
-                    @error('content')
-                        <span class="text-danger">{{ $message }}</span>
-                        <br />
-                    @enderror
-                    <input type="submit" value="Add Comment" class="btn btn-secondary btn-sm">
-                </form>
-                {{-- @endauth --}}
+                <x-comment-form :article="$article" />
             </div>
             <div class="col-12 col-md-6">
-                <ul class="list-group mt-md-5">
-                    <li class="list-group-item active">
-                        <b>Comments ({{ count($article->comments) }})</b>
-                    </li>
-                    @foreach ($article->comments as $comment)
-                        <li class="list-group-item bg-white">
-                            @auth
-                                @if ($comment->user->name === Auth::user()->name)
-                                    <a class="btn-close float-end" href="{{ url("/comments/{$comment->id}/delete") }}"
-                                        role="button">
-                                    </a>
-                                @endif
-                            @endauth
-                            {{ $comment->content }}
-                            <div class="small text-muted mt-2">
-                                By <b>{{ $comment->user->name }}</b>,
-                                {{ $comment->created_at->diffForHumans() }}
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+                <x-comments :article="$article" />
             </div>
         </div>
     </div>
-@endsection
+</x-layout>

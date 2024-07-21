@@ -1,6 +1,5 @@
-@extends('layouts.app')
+<x-layout>
 
-@section('content')
     <div class="container border rounded shadow bg-white p-4">
 
         <form method="POST" action="{{ url("articles/{$article->id}/update") }}">
@@ -11,16 +10,12 @@
             <div class="mb-3">
                 <label>Title</label>
                 <input type="text" name="title" class="form-control" value="{{ old('title') ?? $article->title }}">
-                @error('title')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+                <x-error name="title" />
             </div>
             <div class="mb-3">
                 <label>Body</label>
                 <textarea name="body" class="form-control">{{ old('body') ?? $article->body }}</textarea>
-                @error('body')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+                <x-error name="body" />
             </div>
             <div class="mb-3">
                 <label>Category</label>
@@ -38,4 +33,4 @@
             <input type="submit" value="Update" class="btn btn-primary">
         </form>
     </div>
-@endsection
+</x-layout>

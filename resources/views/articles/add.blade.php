@@ -1,22 +1,16 @@
-@extends('layouts.app')
-
-@section('content')
+<x-layout>
     <div class="container border rounded shadow bg-white p-4">
         <form method="post" action="{{ url('articles/store') }}">
             @csrf
             <div class="mb-3">
                 <label>Title</label>
                 <input type="text" name="title" class="form-control" value="{{ old('title') }}">
-                @error('title')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+                <x-error name="title" />
             </div>
             <div class="mb-3">
                 <label>Body</label>
                 <textarea name="body" class="form-control">{{ old('body') }}</textarea>
-                @error('body')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+                <x-error name="body" />
             </div>
             <div class="mb-3">
                 <label>Category</label>
@@ -28,12 +22,10 @@
                         </option>
                     @endforeach
                 </select>
-                @error('category_id')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+                <x-error name="category_id" />
             </div>
             <a href="{{ session('pre_url') }}" class="btn btn-primary " role="button">Cancel</a>
             <input type="submit" value="Add Article" class="btn btn-primary">
         </form>
     </div>
-@endsection
+</x-layout>

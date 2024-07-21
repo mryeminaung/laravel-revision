@@ -26,4 +26,11 @@ class CommentCreateRequest extends FormRequest
             'article_id' => 'required'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'content.required' => 'Comment field is required.',
+        ];
+    }
 }
