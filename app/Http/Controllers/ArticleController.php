@@ -22,12 +22,14 @@ class ArticleController extends Controller
     public function index()
     {
         // $articles = Article::latest()->paginate(3);
-        $articles = Article::all();
+        $articles = Article::orderBy('created_at', 'DESC')->get();
         $data = Category::all();
+        $filterTag = request()->query('category');
+
         Session::put('pre_url', request()->fullUrl());
         Session::put('dashboard_url', null);
 
-        return view('articles.index', ['articles' => $articles, 'categories' => $data, 'filterTag' => request()->query('category')]);
+        return view('articles.index', ['articles' => $articles, 'categories' => $data, 'filterTag' => $filterTag]);
     }
 
     /**

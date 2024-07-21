@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container bg-white p-4">
+    <div class="container border rounded shadow bg-white p-4">
         <form method="post" action="{{ url('articles/store') }}">
             @csrf
             <div class="mb-3">
@@ -28,6 +28,9 @@
                         </option>
                     @endforeach
                 </select>
+                @error('category_id')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <a href="{{ session('pre_url') }}" class="btn btn-primary " role="button">Cancel</a>
             <input type="submit" value="Add Article" class="btn btn-primary">

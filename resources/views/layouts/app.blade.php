@@ -36,7 +36,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             @auth
-                                <a class="nav-link text-success" href="{{ url('/articles/add') }}">
+                                <a role="button" class="btn btn-outline-primary btn-sm" href="{{ url('/articles/add') }}">
                                     + Add Article
                                 </a>
                             @endauth

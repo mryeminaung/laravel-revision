@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container bg-white p-4">
+    <div class="container border rounded shadow bg-white p-4">
 
         <form method="POST" action="{{ url("articles/{$article->id}/update") }}">
             @csrf

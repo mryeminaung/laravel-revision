@@ -31,16 +31,17 @@
             </div>
         </div>
 
-        {{-- {{ $articles->links() }} --}}
 
         @foreach ($articles as $article)
             @if ($filterTag)
                 @if ($article->category->name === $filterTag)
-                    <div class="card mb-3 bg-white shadow-sm">
+                    <div class="card mb-3 border bg-white shadow">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $article->title }}
-                                <span class="badge bg-primary">{{ $article->category->name }}</span>
-                            </h5>
+                            <div class="d-flex align-items-start justify-content-between">
+                                <h5 class="card-title">{{ $article->title }}</h5>
+                                <span
+                                    class="badge @if (Auth::user()->id === $article->user_id) bg-danger @else bg-primary @endif">{{ $article->category->name }}</span>
+                            </div>
                             <div class="card-subtitle mb-2 text-muted small">
                                 By <strong>{{ $article->user->name }}</strong>,
                                 {{ $article->created_at->diffForHumans() }}
@@ -53,11 +54,13 @@
                     </div>
                 @endif
             @else
-                <div class="card mb-3 bg-white shadow-sm">
+                <div class="card mb-3 border bg-white shadow">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $article->title }}
-                            <span class="badge bg-primary">{{ $article->category->name }}</span>
-                        </h5>
+                        <div class="d-flex align-items-start justify-content-between">
+                            <h5 class="card-title">{{ $article->title }}</h5>
+                            <span
+                                class="badge @if (Auth::user()->id === $article->user_id) bg-danger @else bg-primary @endif">{{ $article->category->name }}</span>
+                        </div>
                         <div class="card-subtitle mb-2 text-muted small">
                             By <strong>{{ $article->user->name }}</strong>,
                             {{ $article->created_at->diffForHumans() }}
@@ -70,5 +73,6 @@
                 </div>
             @endif
         @endforeach
+    </div>
     </div>
 @endsection

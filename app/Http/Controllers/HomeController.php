@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -25,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $articles = User::find(auth()->user()->id)->articles;
+        $articles = User::find(Auth::id())->articles()->orderBy('created_at', 'DESC')->get();
         Session::put('dashboard_url', request()->fullUrl());
         Session::put('pre_url', null);
 

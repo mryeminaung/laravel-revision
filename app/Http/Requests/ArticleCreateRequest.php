@@ -27,4 +27,11 @@ class ArticleCreateRequest extends FormRequest
             'category_id' => 'required'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'category_id.required' => 'The category name field is required.',
+        ];
+    }
 }
