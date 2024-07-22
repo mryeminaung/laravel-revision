@@ -24,7 +24,7 @@
                 </select>
                 <x-error name="category_id" />
             </div>
-            <a href="{{ session('pre_url') }}" class="btn btn-primary " role="button">Cancel</a>
+            <a href="{{ url('/articles') }}" class="btn btn-primary " role="button">Cancel</a>
             <input type="submit" value="Add Article" class="btn btn-primary">
         </form>
     </div>

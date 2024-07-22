@@ -28,6 +28,7 @@ class ArticleController extends Controller
 
         Session::put('pre_url', request()->fullUrl());
         Session::put('dashboard_url', null);
+        Session::put('user_url', null);
 
         return view('articles.index', ['articles' => $articles, 'categories' => $data, 'filterTag' => $filterTag]);
     }

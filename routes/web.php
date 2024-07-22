@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
     return redirect('/articles');
@@ -30,6 +33,16 @@ Route::controller(CommentController::class)->group(function () {
         Route::get('{comment}/delete', 'delete');
     });
 });
+
+Route::get('/{user:name}/articles', function (User $user) {
+    $data = Category::all();
+    $filterTag = request()->query('category');
+    Session::put('user_url', request()->fullUrl());
+    Session::put('pre_url', null);
+    Session::put('dashboard_url', null);
+
+    return view('articles.index', ['articles' => $user->articles, 'categories' => $data, 'filterTag' => $filterTag, 'user' => $user]);
+})->name('user.articles');
 
 Auth::routes();
 

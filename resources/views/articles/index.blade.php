@@ -1,4 +1,4 @@
-@props(['categories', 'filterTag'])
+@props(['articles', 'categories', 'filterTag', 'user'])
 
 <x-layout>
     <div class="container">
@@ -7,7 +7,7 @@
 
         <x-alert name="add" />
 
-        <x-filter-btns :categories="$categories" :filterTag="$filterTag" />
+        <x-filter-btns :user="$user ?? null" :categories="$categories" :filterTag="$filterTag" />
 
         <x-articles-section :articles="$articles" :filterTag="$filterTag" />
 
