@@ -23,10 +23,14 @@
 
         <x-navbar />
 
-        <main class="py-4">
+        <main class="py-4 container">
             {{ $slot }}
         </main>
+
+        {{-- <x-footer /> --}}
+
     </div>
+
 </body>
 
 </html>

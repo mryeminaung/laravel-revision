@@ -7,13 +7,13 @@
             <div class="card mb-3 border bg-white shadow-sm">
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
-                        <h4 class="card-title fw-bold mr-2">{{ $article->title }}</h4>
+                        <h5 class="card-title fw-bold me-2">{{ Str::limit($article->title, '50', '...') }}</h5>
                         <x-badge :article="$article" />
                     </div>
                     <div class="card-subtitle mb-2 small">
                         <x-avatar :article="$article" />
                     </div>
-                    <p class="card-text">{{ $article->body }}</p>
+                    <p class="card-text">{{ Str::limit($article->body, '100', '...') }}</p>
                     <a class="card-link" href="{{ url("/articles/detail/$article->slug") }}">
                         View Detail &raquo;
                     </a>
