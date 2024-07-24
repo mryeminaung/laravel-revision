@@ -1,6 +1,6 @@
 @props(['article'])
 
-<ul class="list-group mt-md-5">
+<ul class="list-group mt-2">
     <li class="list-group-item active">
         <b>Comments ({{ count($article->comments) }})</b>
     </li>

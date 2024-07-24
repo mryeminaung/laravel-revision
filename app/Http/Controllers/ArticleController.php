@@ -62,8 +62,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        // dd($article);
-        return view('articles.detail', ['article' => $article]);
+        $relatedArticles = Article::inRandomOrder()->take(4)->get();
+        return view('articles.detail', ['article' => $article, 'relatedArticles' => $relatedArticles]);
     }
 
     /**
