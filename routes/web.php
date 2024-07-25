@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -43,9 +45,23 @@ Route::get('/{user:name}/articles', function (User $user) {
     return view('articles.index', ['articles' => $user->articles, 'categories' => $data, 'filterTag' => $filterTag, 'user' => $user]);
 })->name('user.articles');
 
+Route::get('/bookmark/{article:slug}/add', function (Article $article) {
+    // dd($article);
+    // dd(auth()->user());
+
+    DB::table('user_article')->insert([
+        'article_id' => $article->id,
+        'user_id' => auth()->user()->id
+    ]);
+
+    return redirect()->route('bookmarks');
+})->name('bookmark.add');
+
 Route::get('/bookmarks', function () {
-    return view('components.bookmarks');
-});
+    $bookmarkedArticles = auth()->user()->bookmarkedArticles;
+
+    return view('components.bookmarks', ['bookmarkedArticles' => $bookmarkedArticles]);
+})->name('bookmarks');
 
 Auth::routes();
 

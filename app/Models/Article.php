@@ -27,4 +27,9 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class, 'article_id');
     }
+
+    public function bookmarked_users()
+    {
+        return $this->belongsToMany(User::class, 'user_article');
+    }
 }

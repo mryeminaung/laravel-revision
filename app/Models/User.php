@@ -55,4 +55,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'user_id');
     }
+
+    public function bookmarkedArticles() {
+        return $this->belongsToMany(Article::class, 'user_article');
+    }
 }

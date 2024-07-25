@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <a href="#" class="text-black">
+    <a href=" {{ route('bookmark.add', ['article' => $article]) }}" class="text-black">
         <svg class="mt-0" xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor"
             class="bi bi-bookmark-plus" viewBox="0 0 16 16">
             <path
