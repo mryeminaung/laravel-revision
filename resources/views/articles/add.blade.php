@@ -1,12 +1,17 @@
 <x-layout>
     <div class="container border rounded shadow bg-white p-4">
-        <form method="post" action="{{ url('articles/store') }}">
+        <form method="post" action="{{ url('articles/store') }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label>Title</label>
                 <input type="text" name="title" class="form-control" value="{{ old('title') }}">
                 <x-error name="title" />
             </div>
+            <div class="mb-3">
+                <label for="article_img">Upload Image</label>
+                <input type="file" class="form-control" id="article_img" name="article_img">
+            </div>
+            <x-error name="article_img" />
             <div class="mb-3">
                 <label>Body</label>
                 <textarea name="body" class="form-control">{{ old('body') }}</textarea>

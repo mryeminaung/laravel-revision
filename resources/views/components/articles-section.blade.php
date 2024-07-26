@@ -1,11 +1,17 @@
 @props(['articles', 'filterTag'])
 
-@foreach ($articles as $article)
+<div class="row">
     @if ($filterTag)
-        @if ($article->category->name === $filterTag)
-            <x-article-card :article="$article" />
-        @endif
+        @foreach ($articles->where('category.name', $filterTag ?? '') as $article)
+            <div class="col-12 col-md-6 col-lg-4">
+                <x-article-card :article="$article" />
+            </div>
+        @endforeach
     @else
-        <x-article-card :article="$article" />
+        @foreach ($articles as $article)
+            <div class="col-12 col-md-6 col-lg-4">
+                <x-article-card :article="$article" />
+            </div>
+        @endforeach
     @endif
-@endforeach
+</div>

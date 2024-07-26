@@ -23,7 +23,7 @@
 
         <x-navbar />
 
-        <main class="py-4 container">
+        <main class="py-4 container" style="margin-top: 60px">
             {{ $slot }}
         </main>
 

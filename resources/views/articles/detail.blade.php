@@ -13,14 +13,16 @@
 
                 <div class="card mb-2 border rounded shadow-sm bg-white mt-1">
                     <div class="card-body">
-                        <div class="d-flex align-items-start justify-content-between">
+                        <img src="{{$article->article_img}}"
+                            class="h-25 w-100 border border-secondary rounded">
+                        <div class="d-flex align-items-start justify-content-between mt-3">
                             <h3 class="card-title fw-bold me-2">{{ $article->title }}</h3>
                             <x-badge :article="$article" />
                         </div>
                         <div class="card-subtitle mb-2 small">
 
                             <x-avatar :article="$article" />
-                           
+
                         </div>
                         <p class="card-text">{{ $article->body }}</p>
 

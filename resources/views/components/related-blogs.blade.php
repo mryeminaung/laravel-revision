@@ -6,7 +6,9 @@
         @foreach ($relatedArticles as $article)
             <div class="card mb-3 border bg-white shadow-sm">
                 <div class="card-body">
-                    <div class="d-flex align-items-start justify-content-between">
+                    <img src="{{ $article->article_img }}" alt="{{ $article->slug }}"
+                        class="h-25 w-100 border border-secondary rounded">
+                    <div class="d-flex align-items-start mt-3 justify-content-between">
                         <h5 class="card-title fw-bold me-2">{{ Str::limit($article->title, '50', '...') }}</h5>
                         <x-badge :article="$article" />
                     </div>

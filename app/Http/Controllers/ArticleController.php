@@ -52,9 +52,21 @@ class ArticleController extends Controller
         $validatedData['slug'] = str_replace(' ', '-', strtolower($request->title));
         $validatedData['user_id'] = auth()->user()->id;
 
+        if ($request->hasFile('article_img')) {
+            $file = $request->file('article_img');
+
+            $filename = time() . '_' . $file->hashName();
+
+            $path = $file->storeAs('public/article_imgs', $filename);
+
+            $validatedData['article_img'] = $path;
+        }
+
+        // dd($validatedData);
+
         Article::create($validatedData);
 
-        return redirect('/home')->with('add', 'Article Added');
+        return redirect('/home')->with('add', 'Article Added successfully');
     }
 
     /**
@@ -62,7 +74,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $relatedArticles = Article::inRandomOrder()->take(4)->get();
+        $relatedArticles = Article::inRandomOrder()->take(3)->get();
         return view('articles.detail', ['article' => $article, 'relatedArticles' => $relatedArticles]);
     }
 
@@ -83,9 +95,19 @@ class ArticleController extends Controller
         $validatedData = $request->validated();
         $validatedData['slug'] = str_replace(' ', '-', strtolower($request->title));
 
+        if ($request->hasFile('article_img')) {
+            $file = $request->file('article_img');
+
+            $filename = time() . '_' . $file->hashName();
+
+            $path = $file->storeAs('public/article_imgs', $filename);
+
+            $validatedData['article_img'] = $path;
+        }
+
         $article->update($validatedData);
 
-        return redirect("/articles/detail/{$article->slug}")->with('update', 'Article Updated');
+        return redirect("/articles/detail/{$article->slug}")->with('update', 'Article Updated Successfully');
     }
 
     /**
@@ -94,6 +116,6 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
-        return redirect(session('pre_url') ?? session('dashboard_url'))->with('delete', 'Article Deleted');
+        return redirect(session('pre_url') ?? session('dashboard_url'))->with('delete', 'Article Deleted Successfully');
     }
 }

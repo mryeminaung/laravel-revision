@@ -18,6 +18,7 @@ class ArticleFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence,
+            'article_img' => 'https://dummyimage.com/700x400/000/fff.png&text=Blog+Img',
             'slug' => str_replace(' ', '-', strtolower($this->faker->sentence(4))),
             'body' => $this->faker->paragraph(10),
             'user_id' => rand(1, 10),

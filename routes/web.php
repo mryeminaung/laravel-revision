@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ImageController;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
@@ -62,6 +63,7 @@ Route::get('/bookmarks', function () {
 
     return view('components.bookmarks', ['bookmarkedArticles' => $bookmarkedArticles]);
 })->name('bookmarks');
+
 
 Auth::routes();
 

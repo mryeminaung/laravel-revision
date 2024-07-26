@@ -23,6 +23,7 @@ class ArticleUpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|min:5',
+            'article_img' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
             'body' => 'required|min:5',
             'category_id' => 'required'
         ];
