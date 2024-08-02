@@ -57,9 +57,11 @@ class ArticleController extends Controller
 
             $filename = time() . '_' . $file->hashName();
 
-            $path = $file->storeAs('public/article_imgs', $filename);
+            // $path = $file->storeAs('article_imgs', $filename);
+            $path = 'article_imgs/';
+            $file->move($path, $filename);
 
-            $validatedData['article_img'] = $path;
+            $validatedData['article_img'] = $path . $filename;
         }
 
         // dd($validatedData);
@@ -100,7 +102,7 @@ class ArticleController extends Controller
 
             $filename = time() . '_' . $file->hashName();
 
-            $path = $file->storeAs('public/article_imgs', $filename);
+            $path = $file->storeAs('article_imgs', $filename);
 
             $validatedData['article_img'] = $path;
         }

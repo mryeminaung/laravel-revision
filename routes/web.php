@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ImageController;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
@@ -14,7 +13,6 @@ use Illuminate\Support\Facades\Session;
 Route::get('/', function () {
     return redirect('/articles');
 });
-
 // article CRUD
 Route::controller(ArticleController::class)->group(function () {
     Route::prefix('articles')->group(function () {
